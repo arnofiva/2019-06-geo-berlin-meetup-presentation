@@ -1,10 +1,6 @@
----
-layout: null
----
-
 This is a [reveal.js](https://github.com/hakimel/reveal.js/) fork containing the presentation I gave at the Geo Berlin Meetup June, 2019.
 
-Online presentation: {{ site.url }} \
+Online presentation: https://jsapi.dev/2019-06-geo-berlin-meetup-presentation/ \
 Meetup: https://www.meetup.com/Geo-Berlin/events/261022189/
 
 
