@@ -1,49 +1,472 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <title>Geo Meetup Berlin</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css">
 
-		<script src="js/reveal.js"></script>
+    <!-- Additional styling -->
+    <style type="text/css">
+        /* 1. Style header/footer <div> so they are positioned as desired. */
+        
+        #header-left {
+            position: absolute;
+            top: 0%;
+            left: 0%;
+        }
+        
+        #header-right {
+            position: absolute;
+            top: 0%;
+            right: 0%;
+        }
+        
+        #footer-left {
+            position: absolute;
+            bottom: 0%;
+            left: 0%;
+        }
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true }
-				]
-			});
-		</script>
-	</body>
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4,
+        .reveal h5,
+        .reveal h6 {
+            text-transform: none;
+        }
+
+        .overlay {
+            position: absolute;
+            width: 40%;
+            right: 0;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 20px;
+            font-size: 20px;
+            text-align: left;
+        }
+
+        .overlay * {
+            color: #ffffff !important;
+        }
+
+        .overlay a {
+            font-size: 0.8em;
+        }
+
+        .container{
+            display: flex;
+        }
+        .col{
+            flex: 1;
+        }
+        .reveal section .logo {
+            border: none;
+            box-shadow: none;
+            max-width: 75%;
+            max-height: 75%;
+        }
+
+        .reveal section img {
+            border: none;
+            box-shadow: none;
+        }
+
+        .logo:not(.logo-arcgis) {
+            filter: grayscale(100%);
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h2>Sharing Urban Plans in 3D</h2>
+
+                <p>Arno Fiva, Esri R&D Center Zürich</p>
+                <p><a href="mailto:afiva@esri.com" target="_blank">afiva@esri.com</a> |
+                    Twitter: <a href="https://twitter.com/arnofiva" target="_blank">@arnofiva</a></p>
+                
+                <img src="media/berlin.png" style="border: none; box-shadow: none;" />
+
+                <p>Geo Berlin Meetup, 5. June 2019</p>
+
+            </section>
+            <section>
+                    <h2>Why 3D maps?</h2>
+                    <p>Provide a more intuitive representation</p>
+                    <div class="col">
+                        <div class="container">
+                                <div class="col">
+                                    <p><img class="logo" src="media/indoor2D.png" /></p>
+                                </div>
+                                <div class="col">
+                                    <p><img class="logo" src="media/indoor3D.jpg" /></p>
+                                </div>
+                            </div>
+                    </div>
+                </script>
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                        * Because we can: WebGL allows us to create and share such content through the browser
+                    </script>
+                </aside>
+            </section>
+            <section data-markdown>
+                <script type="text/template">
+                    ## WebGL
+                    * JavaScript API to OpenGL
+                    * Supported by all major browsers
+                    * Desktop and Mobile
+                </script>
+            </section>
+            <section data-markdown>
+                <script type="text/template">
+                    ![ROME](media/google-rome.png)
+                </script>
+            </section>
+            <section data-background-video="media/google-rome.mp4">
+                <div class="overlay" data-markdown>
+                    <script type="text/template">
+                        ## ROME
+                        http://www.ro.me/
+                        * Created by Google Creative Lab
+                        * Show WegGL capabilities in Chrome
+                    </script>
+                </div>
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                        * Hundreds of people, half a year, creators, directors, animators
+                        * Not every 3D web content requires this effort
+                    </script>
+                </aside>
+            </section>
+            <section>
+
+                <h2>WebGL Frameworks</h2>
+                <div class="container fragment">
+
+                    <div class="col">
+                        <h4>Rendering</h4>
+                        <div class="container">
+                                <div class="col">
+                                    <p><img class="logo" src="media/webgl-threejs.png" /></p>
+                                </div>
+                                <div class="col">
+                                    <p><img class="logo" src="media/webgl-babylonjs.png" /></p>
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="col">
+                        <h4>Mapping</h4>
+                        <div class="container">
+                            <div class="col">
+                                <p><img class="logo" src="media/webgl-cesium.png" /></p>
+                                <p><img class="logo" src="media/webgl-mapbox.png" /></p>
+                                <p><img class="logo" src="media/webgl-deckgl.png" /></p>
+                            </div>
+                            <div class="col">
+                                    <p><img class="logo" src="media/webgl-google-earth.png" /></p>
+                                    <p><img class="logo logo-arcgis" src="media/webgl-esri.png" /></p>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                        * Various frameworks that abstract WebGL away
+                        * Frameworks for 3D rendering and web maps specifically
+                    </script>
+                </aside>
+            </section>
+            <section data-background-video="media/scene-viewer-berlin.mp4">
+                <div class="overlay fragment" data-markdown>
+                    ## Scene Viewer
+                    http://www.arcgis.com/home/webscene/viewer.html
+                </div>
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                        ## Scene Viewer
+                        * UI for creating 3D web maps
+                        * Comes with tools (measurement)
+                        * Allows you to style your maps
+                        * Allows you to share maps, within Scene Viewer
+                    </script>
+                </aside>
+            </section>
+            <section data-markdown data-background-video="media/scene-viewer-measure.mp4">
+            </section>
+            <section data-markdown data-background-video="media/scene-viewer-style.mp4">
+            </section>
+            <section data-background-image="media/scene-viewer-berlin.png">
+                <div class="overlay fragment" data-markdown>
+                    ## Open Data
+                    ArcGIS Online
+                    https://www.arcgis.com/home/search.html
+                </div>
+            </section>
+            <section data-background-video="media/jsapi-berlin.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                        ## JavaScript API
+                        * Integrate web map (also ones created with SV) into your website
+                        * Build web apps with custom visualizations, interactions
+                    </script>
+                </aside>
+            </section>
+            <section data-markdown>
+                <script type="text/template">
+                    https://developers.arcgis.com/javascript/
+                    ![ArcGIS API for JavaScript](media/jsapi-sdk.png)
+                </script>
+            </section>
+            <section data-background-iframe="https://codepen.io/arnofiva/pen/byzOoM">
+            </section>
+            <section data-background-video="media/turanga-sv-mesh.mp4" data-background-video-loop="true">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                        ## Advanced data
+                        * Integrated mesh showing realistic surounding
+                        * Import Revit/BIM models as a Building Scene Layer
+                        * SV allows you to show, share and inspect building details
+                    </script>
+                </aside>
+            </section>
+            <section data-background-video="media/turanga-sv-bsl.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                    </script>
+                </aside>
+            </section>
+            <section data-background-video="media/turanga-sv-slice.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                    </script>
+                </aside>
+            </section>
+            <section data-background-video="media/turanga-sv-measure.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                    </script>
+                </aside>
+            </section>
+
+            <section data-background-video="media/turanga-app-bsl.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                        ## Advanced data
+                        * Use building scene in custom styled app
+                    </script>
+                </aside>
+            </section>
+            <section data-background-video="media/turanga-app-floors.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                    </script>
+                </aside>
+            </section>
+            <section data-background-video="media/turanga-app-surroundings.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                        ## Advanced data 
+                        * Integrate 3D map into website with design & context
+                        * API provides capabilities to isolate specific floors
+                        * Show surrounding information, such as points of interest, public transportation
+                        * Not a public demo yet, data and source code will be available soon
+                    </script>
+                </aside>
+            </section>
+
+            <section data-background-video="media/skyscraper-explorer-manhattan.mp4">
+                <div class="overlay fragment">
+                    <h3>Skyscraper Explorer</h3>
+                    <a class="small" href="https://esri.github.io/Manhattan-skyscraper-explorer/" target="_blank">https://esri.github.io/Manhattan-skyscraper-explorer/</a>
+                </div>
+            </section>
+            <section data-background-video="media/skyscraper-explorer-github.mp4">
+                <div class="overlay">
+                    <h2>Source Code on GitHub</h2>
+                    <a class="small" href="https://github.com/Esri/Manhattan-skyscraper-explorer">https://github.com/Esri/Manhattan-skyscraper-explorer</a>
+                </div>
+            </section>
+            <section data-background-video="media/skyscraper-explorer-zurich.mp4">
+                <div class="overlay">
+                    <h3>Hochhaus-Viewer</h3>
+                    <a href="http://www.stadt-zuerich.ch/hochhaus" target="_blank">http://www.stadt-zuerich.ch/hochhaus</a>
+                    <p>
+                        <ul>
+                            <li>Open Data</li>
+                            <li>Planned Buildings</li>
+                        </ul>
+                    </p>
+                </div>
+            </section>
+
+            <section data-background-video="media/urban-intro.mp4">
+                <div data-markdown class="overlay fragment">
+                    ## Urban
+
+                    Hollistic view for
+
+                    * Goverment
+                    * Architecture, engineering & construction
+                    * Real estate
+                    * Citizens
+                </div>
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                    </script>
+                </aside>
+            </section>
+            <section data-background-video="media/urban-demographics.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                    </script>
+                </aside>
+            </section>
+            <section data-background-video="media/urban-plan.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                    </script>
+                </aside>
+            </section>
+            <section data-background-video="media/urban-project.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                    </script>
+                </aside>
+            </section>
+            <section data-background-video="media/urban-website.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                    </script>
+                </aside>
+            </section>
+
+            <section data-background-video="media/pp-intro.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                    </script>
+                </aside>
+            </section>
+            <section data-background-image="media/pp-vector-tile-editor.png">
+                <div class="overlay fragment" data-markdown>
+                    ## Vector Tile Editor
+                    https://developers.arcgis.com/vector-tile-style-editor/
+                </div>
+            </section>
+            <section data-background-video="media/pp-ground.mp4">
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                    </script>
+                </aside>
+            </section>
+            <section data-background-video="media/pp-3d-objects.mp4">
+                <div data-markdown class="overlay fragment">
+                    ## Participatory Planning
+                    
+                    Source Code & Live Demo \
+                    https://github.com/esri/participatory-planning
+                </div>
+                <aside class="notes" data-markdown>
+                    <script type="text/template">
+                    </script>
+                </aside>
+            </section>
+            <section data-markdown>
+                <script type="text/template">
+                    ## Conclusions
+                    * 3D maps can be shared through the web
+                    * Many tools and APIs for creating custom experience
+                    * Lots of open data available
+                </script>
+            </section>
+            <section data-markdown>
+                    <script type="text/template">
+                        ## Resources
+                        ArcGIS Online & Living Atlas \
+                        https://www.arcgis.com \
+                        https://livingatlas.arcgis.com
+
+                        ArcGIS API for JavaScript
+                        https://developers.arcgis.com/javascript/
+
+                        3D Samples of Raluca Nicola ([@nicolaraluk](https://twitter.com/nicolaraluk/))
+                        https://ralucanicola.github.io/JSAPI_demos/
+                    </script>
+                </section>
+            <section data-markdown>
+                <script type="text/template">
+                    ## Thank you!
+                </script>
+            </section>
+        </div>
+    </div>
+
+    <script src="js/reveal.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+    <!-- 2. Create hidden header/footer <div> -->
+    <div id="hidden" style="display:none;">
+        <div id="header">
+            <div id="footer-left">twitter.com/arnofiva</div>
+        </div>
+    </div>
+
+    <script>
+        // More info about config & dependencies:
+        // - https://github.com/hakimel/reveal.js#configuration
+        // - https://github.com/hakimel/reveal.js#dependencies
+        Reveal.initialize({
+            hash: true,
+            dependencies: [{
+                src: 'plugin/markdown/marked.js'
+            }, {
+                src: 'plugin/markdown/markdown.js'
+            }, {
+                src: 'plugin/notes/notes.js',
+                async: true
+            }, {
+                src: 'plugin/highlight/highlight.js',
+                async: true
+            }]
+        });
+
+        // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
+        // var header = $('#header').html();
+        // if (window.location.search.match(/print-pdf/gi)) {
+        //     Reveal.addEventListener('ready', function(event) {
+        //         $('.slide-background').append(header);
+        //     });
+        // } else {
+        //     $('div.reveal').append(header);
+        // }
+    </script>
+
+</body>
+
 </html>
